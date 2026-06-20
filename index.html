@@ -87,23 +87,55 @@
   .notice ol { padding-left: 18px; }
   .notice ol li { font-size: .85rem; color: var(--steel); margin-bottom: 5px; font-family: 'Arial', sans-serif; }
 
-  /* ── PREVIEW ── */
+  /* ── PREVIEW (A4 PAGES) ── */
   #preview-pane { display: none; }
-  .preview-doc { max-width: 800px; margin: 0 auto; background: white; border: 1px solid #ccc; padding: 48px 56px; font-family: 'Times New Roman', serif; font-size: 13px; line-height: 1.6; color: #000; box-shadow: 0 4px 20px rgba(0,0,0,.15); }
-  .preview-doc h2 { text-align: center; font-size: 14px; margin-bottom: 6px; letter-spacing: .02em; }
-  .preview-doc .sub { text-align: center; font-size: 12px; margin-bottom: 4px; }
-  .preview-doc .italic { font-style: italic; }
-  .preview-doc hr { border: none; border-top: 1px solid #000; margin: 14px 0; }
-  .preview-doc .part-title { font-weight: bold; text-decoration: underline; font-size: 12px; margin: 18px 0 10px; }
-  .preview-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
-  .preview-table td { border: 1px solid #999; padding: 5px 8px; font-size: 12px; vertical-align: top; }
-  .preview-table td:first-child { font-weight: bold; width: 45%; background: #F8F8F8; }
-  .preview-sig { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 30px; }
-  .preview-sig .sig-block { border-top: 1px solid #000; padding-top: 4px; font-size: 11px; }
-  .doc-ref { text-align: right; font-size: 10px; color: #666; margin-bottom: 6px; }
+  #previewDoc { display: flex; flex-direction: column; align-items: center; }
+  .a4-page { width: 210mm; min-height: 297mm; background: #fff; margin: 0 auto 22px; padding: 16mm 15mm; font-family: 'Times New Roman', serif; font-size: 12.5px; line-height: 1.5; color: #000; box-shadow: 0 4px 20px rgba(0,0,0,.18); position: relative; }
+  .a4-page .pg-tag { position: absolute; top: 6mm; left: 15mm; color: #2E74B5; font-size: 11px; font-style: italic; }
+  .a4-page .pg-foot { position: absolute; bottom: 6mm; left: 15mm; color: #555; font-size: 9.5px; }
+  .doc-h2 { text-align: center; font-size: 14px; font-weight: bold; margin: 6px 0; }
+  .doc-sub { text-align: center; font-size: 12px; font-weight: bold; margin-bottom: 4px; }
+  .part-title { font-weight: bold; font-size: 12.5px; margin: 14px 0 10px; }
+  .off-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+  .off-table td { border: 1px solid #000; padding: 5px 7px; font-size: 11.5px; vertical-align: top; }
+  .off-table td.num { width: 26px; text-align: left; font-weight: normal; }
+  .off-table td.lbl { width: 42%; }
+  .off-table td.val { font-weight: bold; }
+  .off-table tr.grouphdr td { background: #D9D9D9; font-weight: bold; }
+  .certify { font-size: 12px; margin: 18px 0 6px; }
+  .sig-line { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 34px; }
+  .sig-line .blk { font-size: 11.5px; }
+  .sig-line .blk .ink { font-family: 'Georgia', serif; font-style: italic; font-size: 14px; min-height: 20px; }
+  .sig-line .blk .rule { border-top: 1px solid #000; margin-top: 2px; padding-top: 3px; }
+  .docs-list { margin: 8px 0 0 0; }
+  .docs-list .dh { font-weight: bold; font-size: 12.5px; margin-bottom: 8px; }
+  .docs-list ol { padding-left: 26px; }
+  .docs-list ol li { font-size: 11.5px; margin-bottom: 5px; }
+  .partc-para { font-size: 12.5px; line-height: 2; }
+  .partc-para .fill { font-weight: bold; border-bottom: 1px solid #000; padding: 0 4px; }
+  /* attachment pages */
+  .att-page { padding-top: 14mm; }
+  .att-head { border-bottom: 2px solid #1B2D4F; padding-bottom: 6px; margin-bottom: 10px; }
+  .att-head .att-no { font-size: 11px; color: #2E74B5; font-style: italic; }
+  .att-head .att-title { font-size: 14px; font-weight: bold; color: #1B2D4F; }
+  .att-img { display: block; max-width: 100%; max-height: 245mm; margin: 0 auto; object-fit: contain; border: 1px solid #ccc; }
+  .att-note { font-size: 11.5px; color: #444; border: 1px dashed #999; padding: 14px; border-radius: 4px; background: #FAFAFA; }
+  .att-note strong { color: #1B2D4F; }
   .print-actions { text-align: right; margin-bottom: 16px; display: flex; gap: 10px; justify-content: flex-end; }
 
-  @media print { header, .tab-bar, .container > *:not(#preview-pane), .print-actions, .tab-btn { display: none !important; } #preview-pane { display: block !important; } .preview-doc { box-shadow: none; border: none; padding: 20px; } }
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    html, body { background: #fff !important; }
+    header, .tab-bar, .container > *:not(#preview-pane), .print-actions, .tab-btn { display: none !important; }
+    .container { margin: 0 !important; padding: 0 !important; max-width: none !important; }
+    #preview-pane { display: block !important; }
+    .a4-page { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; page-break-after: always; }
+    .a4-page:last-child { page-break-after: auto; }
+    .a4-page .pg-tag, .a4-page .pg-foot { position: static; display: block; }
+    .a4-page .pg-foot { margin-top: 18px; }
+    .att-img { max-height: 250mm; }
+    .off-table tr.grouphdr td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
   @media (max-width: 640px) { .row.col-2, .row.col-3, .row.col-13, .sig-row { grid-template-columns: 1fr; } header { flex-direction: column; text-align: center; padding: 20px; } .tab-bar { overflow-x: auto; } }
 
   /* ── PANE VISIBILITY ── */
@@ -585,6 +617,35 @@ const val = id => ($( id)?.value ?? '').trim();
 const fmt = dateStr => { if (!dateStr) return ''; const [y,m,d] = dateStr.split('-'); return `${d}/${m}/${y}`; };
 
 function toggleField(id, show) { const el = $(id); if (el) el.style.display = show ? 'flex' : 'none'; }
+const esc = s => (s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+/* ── ATTACHMENT CAPTURE ──
+   Read uploaded files as data URLs so they can be rendered into the print-out. */
+const DOC_LABELS = {
+  doc_a: 'a. Certificate of first medical / dental degree, or qualification in nursing',
+  doc_b: 'b. Certificate of registration from Medical/Dental/Nursing Council of country of residence',
+  doc_c: 'c. Certificate of Good Standing (issued within 6 months)',
+  doc_d: 'd. Certificate(s) of postgraduate degree(s) (where applicable)',
+  doc_e: 'e. Letter from current employer',
+  doc_f: 'f. Curriculum vitae',
+  doc_g: 'g. Copy of business pages of passport',
+  doc_h: 'h. Letter of agreement from Sri Lankan specialist providing supervision',
+  doc_i: 'i. Receipt of payment for registration fee of Rs 38,500/-'
+};
+const attachments = {}; // id -> [ {name, type, dataURL} ]
+
+Object.keys(DOC_LABELS).forEach(id => {
+  const inp = $(id);
+  if (!inp) return;
+  inp.addEventListener('change', function () {
+    attachments[id] = [];
+    [...this.files].forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => attachments[id].push({ name: file.name, type: file.type, dataURL: e.target.result });
+      reader.readAsDataURL(file);
+    });
+  });
+});
 
 /* auto-age */
 $('a_dob').addEventListener('change', function() {
@@ -627,108 +688,158 @@ function submitForm() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ── BUILD PREVIEW ── */
+/* ── BUILD PREVIEW (official A4 multi-page layout + attachments) ── */
+const DOCREF = 'Temporary Registration 67A (C)';
+const FOOT = 'Approved by SLMC on 25.01.2019';
+const HEAD = `<div class="pg-tag">${DOCREF}</div><div class="pg-foot">${FOOT}</div>`;
+
 function buildPreview() {
-  const prevReg = val('a_prev_reg') === 'Yes' ? `Yes — ${val('a_prev_reg_info') || 'details not provided'}` : (val('a_prev_reg') || '—');
-  const bPrevEmp = val('b_prev_emp') === 'Yes' ? `Yes — ${val('b_prev_details') || 'details not provided'}` : (val('b_prev_emp') || '—');
+  const v  = id => esc(val(id));
+  const ml = id => esc(val(id)).replace(/\n/g, '<br>');     // multiline
+  const orDash = s => s && s.length ? s : '&nbsp;';
+  const ink = s => s && s.length ? `<span class="ink">${s}</span>` : '<span class="ink">&nbsp;</span>';
+  // 3-column official row: number | label | value
+  const r = (n, label, value) => `<tr><td class="num">${n}.</td><td class="lbl">${label}</td><td class="val">${orDash(value)}</td></tr>`;
+  const grp = text => `<tr class="grouphdr"><td colspan="3">${text}</td></tr>`;
 
-  const row = (label, value) => `<tr><td>${label}</td><td>${value || '—'}</td></tr>`;
+  const dob = `DOB: ${fmt(val('a_dob')) || 'DD / MM / YYYY'}<br>Age: ${orDash(v('a_age'))} &nbsp;&nbsp; Sex: ${orDash(v('a_sex'))}`;
+  const tel = `Fixed line: ${orDash(v('a_tel_fixed'))}<br>Mobile: ${orDash(v('a_tel_mobile'))}`;
+  const council = `Medical Council: ${orDash(v('a_council'))}<br>Registration number: ${orDash(v('a_council_reg'))}`;
+  const prevReg = v('a_prev_reg') || '&nbsp;';
+  const prevRegNo = val('a_prev_reg') === 'Yes' ? orDash(v('a_prev_reg_info')) : '&nbsp;';
+  const docsEnc = v('a_docs_enclosed') + (val('a_reasons') ? ` — ${v('a_reasons')}` : '');
+  const receipt = v('a_receipt') + (val('a_reasons') ? ` — ${v('a_reasons')}` : '');
 
-  const html = `
-    <div class="doc-ref">Temporary Registration 67A (C) &nbsp;·&nbsp; Approved by SLMC on 25.01.2019</div>
-    <h2>SRI LANKA MEDICAL COUNCIL</h2>
-    <div class="sub">TEMPORARY REGISTRATION AS A MEDICAL PRACTITIONER, DENTIST OR NURSE</div>
-    <div class="sub">FOR NON-REMUNERATIVE PURPOSES IN SRI LANKA (CATEGORY C)</div>
-    <hr />
+  /* ── PAGE 1: Part A (rows 1–13) ── */
+  const pageA1 = `
+    <div class="a4-page">${HEAD}
+      <div class="doc-h2">SRI LANKA MEDICAL COUNCIL</div>
+      <div class="doc-sub">TEMPORARY REGISTRATION AS A MEDICAL PRACTITIONER, DENTIST OR NURSE<br>FOR NON-REMUNERATIVE PURPOSES IN SRI LANKA (CATEGORY C)</div>
+      <div class="part-title">Annex 1. Application for temporary registration (Category C)</div>
+      <div class="part-title">Part A: to be completed by applicant</div>
+      <table class="off-table">
+        ${grp('To be completed by all applicants')}
+        ${r(1, 'Full name (underline family name):', v('a_fullname'))}
+        ${r(2, 'Date of birth, age in years and sex:', dob)}
+        ${r(3, 'Nationality:', v('a_nationality'))}
+        ${r(4, 'Passport number:', v('a_passport'))}
+        ${r(5, 'Permanent address:', ml('a_perm_address'))}
+        ${r(6, 'Address in Sri Lanka (if known):', ml('a_sl_address'))}
+        ${r(7, 'Telephone numbers', tel)}
+        ${r(8, 'Email address', v('a_email'))}
+        ${r(9, 'Institution where first medical degree was obtained:', v('a_degree_institution'))}
+        ${r(10, 'Name of first medical degree:', v('a_degree_name'))}
+        ${r(11, 'Year in which first medical degree was obtained:', v('a_degree_year'))}
+        ${r(12, 'Medical Council from which applicant first received license to practice Medicine, and registration number:', council)}
+        ${r(13, 'Current employment:', v('a_employment'))}
+      </table>
+    </div>`;
 
-    <div class="part-title">Annex 1 — Part A: Completed by Applicant</div>
-    <table class="preview-table">
-      ${row('1. Full name (family name underlined)', val('a_fullname'))}
-      ${row('2. Date of birth / Age / Sex', `${fmt(val('a_dob'))} &nbsp;|&nbsp; ${val('a_age') ? val('a_age') + ' years' : '—'} &nbsp;|&nbsp; ${val('a_sex') || '—'}`)}
-      ${row('3. Nationality', val('a_nationality'))}
-      ${row('4. Passport number', val('a_passport'))}
-      ${row('5. Permanent address', val('a_perm_address').replace(/\n/g,'<br>'))}
-      ${row('6. Address in Sri Lanka', val('a_sl_address').replace(/\n/g,'<br>') || '—')}
-      ${row('7. Telephone', `Fixed: ${val('a_tel_fixed') || '—'} &nbsp;|&nbsp; Mobile: ${val('a_tel_mobile') || '—'}`)}
-      ${row('8. Email address', val('a_email'))}
-      ${row('9. Institution (first medical degree)', val('a_degree_institution'))}
-      ${row('10. Name of first medical degree', val('a_degree_name'))}
-      ${row('11. Year degree obtained', val('a_degree_year'))}
-      ${row('12. Medical Council &amp; registration number', `${val('a_council') || '—'} &nbsp;·&nbsp; Reg. No: ${val('a_council_reg') || '—'}`)}
-      ${row('13. Current employment', val('a_employment') || '—')}
-      ${row('14. Nature of clinical work / education &amp; training', val('a_clinical_work').replace(/\n/g,'<br>'))}
-      ${row('15. Hospital / institution in Sri Lanka', val('a_hospital'))}
-      ${row('16. Sponsor', val('a_sponsor'))}
-      ${row('17. Sri Lankan specialist — supervisor', val('a_supervisor'))}
-      ${row('18. Period of temporary registration', `From: ${fmt(val('a_period_from'))} &nbsp; To: ${fmt(val('a_period_to'))}`)}
-      ${row('19–20. Previous SLMC registrations', prevReg)}
-      ${row('21. All documents enclosed', val('a_docs_enclosed') || '—')}
-      ${row('22. Receipt of payment attached', val('a_receipt') || '—')}
-      ${val('a_reasons') ? row('Reasons (missing items)', val('a_reasons')) : ''}
-    </table>
-
-    <div class="preview-sig">
-      <div class="sig-block">
-        ${val('a_sig') || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
-        Signature of Applicant
+  /* ── PAGE 2: Part A (rows 14–22) + declaration + documents list ── */
+  const pageA2 = `
+    <div class="a4-page">${HEAD}
+      <table class="off-table">
+        ${grp('Proposed activities in Sri Lanka:')}
+        ${r(14, 'Nature of clinical work (personal education and training):', ml('a_clinical_work'))}
+        ${r(15, 'Hospital / institution in which applicant will work:', v('a_hospital'))}
+        ${r(16, 'Sponsor (Medical Faculty / PGIM / Professional body):', v('a_sponsor'))}
+        ${r(17, 'Name and details of Sri Lankan specialist who will supervise clinical activities:', v('a_supervisor'))}
+        ${r(18, 'Period of temporary registration applied for', `From: ${fmt(val('a_period_from')) || 'DD/MM/YYYY'} &nbsp; To: ${fmt(val('a_period_to')) || 'DD/MM/YYYY'}`)}
+        ${grp('SLMC registration')}
+        ${r(19, 'Any previous registrations in Sri Lanka:', prevReg)}
+        ${r(20, 'If yes, registration number and dates', prevRegNo)}
+        ${grp('Accompanying documents and registration fee')}
+        ${r(21, 'Are all requested documents enclosed? If not, give reasons', docsEnc)}
+        ${r(22, 'Is receipt of payment of registration fee attached? If not, give reasons', receipt)}
+      </table>
+      <div class="certify">I certify that the information given above and the documents submitted by me are accurate and true.</div>
+      <div class="sig-line">
+        <div class="blk"><div class="ink">${v('a_sig')}</div><div class="rule">Signature of applicant</div></div>
+        <div class="blk"><div class="ink">${fmt(val('a_sig_date'))}</div><div class="rule">Date</div></div>
       </div>
-      <div class="sig-block">
-        ${fmt(val('a_sig_date')) || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
-        Date
+      <div class="docs-list">
+        <div class="dh">Documents to be submitted with application:</div>
+        <ol type="a">
+          <li>Certificate of first medical / dental degree, or qualification in nursing</li>
+          <li>Certificate of registration from Medical/Dental/Nursing Council of country of residence</li>
+          <li>Certificate of Good Standing from Council of country of residence, issued not more than 6 months preceding application</li>
+          <li>Certificate(s) of postgraduate degree(s) (where applicable)</li>
+          <li>Letter from current employer</li>
+          <li>Curriculum vitae</li>
+          <li>Copy of business pages of passport</li>
+          <li>Letter of agreement from Sri Lankan specialist providing supervision</li>
+          <li>Receipt of payment for registration fee of Rs 38,500/-</li>
+        </ol>
       </div>
-    </div>
+    </div>`;
 
-    <hr style="margin-top:30px"/>
-    <div class="part-title">Part B: Completed by Head of Sponsoring Institution</div>
-    <table class="preview-table">
-      ${row('1. Name of Institution', val('b_institution'))}
-      ${row('2. Address of Institution', val('b_address').replace(/\n/g,'<br>'))}
-      ${row('3. Telephone', val('b_tel') || '—')}
-      ${row('4. Head of institution', val('b_head_name'))}
-      ${row('6. Telephone (office / mobile)', `${val('b_head_tel_office') || '—'} / ${val('b_head_tel_mobile') || '—'}`)}
-      ${row('7. Email', val('b_head_email'))}
-      ${row('8. Nature of work / responsibilities', val('b_work_nature').replace(/\n/g,'<br>'))}
-      ${row('9. Supervising specialist', val('b_supervisor'))}
-      ${row('10. Duration', `From: ${fmt(val('b_from'))} &nbsp; To: ${fmt(val('b_to'))}`)}
-      ${row('11–12. Previously employed in same capacity', bPrevEmp)}
-    </table>
-
-    <div class="preview-sig">
-      <div class="sig-block">
-        ${val('b_sig') || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
-        Signature of Head of Institution
+  /* ── PAGE 3: Part B ── */
+  const bPrevEmp = v('b_prev_emp');
+  const bPrevDet = val('b_prev_emp') === 'Yes' ? orDash(v('b_prev_details')) : '&nbsp;';
+  const pageB = `
+    <div class="a4-page">${HEAD}
+      <div class="part-title">Part B. To be completed by Dean of Medical / Dental Faculty, Director / PGIM or President of Professional Body (sponsor)</div>
+      <table class="off-table">
+        ${r(1, 'Name of Institution (Faculty / PGIM / Professional Body):', v('b_institution'))}
+        ${r(2, 'Address of Institution:', ml('b_address'))}
+        ${r(3, 'Telephone number of Institution:', v('b_tel'))}
+        ${r(4, 'Name of head of institution (Dean / Director / President):', v('b_head_name'))}
+        ${r(6, 'Telephone number of head of institution', `Office: ${orDash(v('b_head_tel_office'))}<br>Mobile: ${orDash(v('b_head_tel_mobile'))}`)}
+        ${r(7, 'Email address of head of institution:', v('b_head_email'))}
+        ${r(8, 'Nature of work to be carried out by applicant, with clinical responsibilities and duties', ml('b_work_nature'))}
+        ${r(9, 'Specialist who will supervise clinical activities undertaken by applicant', v('b_supervisor'))}
+        ${r(10, 'Duration of proposed activities:', `From: ${fmt(val('b_from')) || '&nbsp;'}<br>To: ${fmt(val('b_to')) || '&nbsp;'}`)}
+        ${r(11, 'Applicant has been previously employed in same capacity?', bPrevEmp)}
+        ${r(12, 'If yes, provide details', bPrevDet)}
+      </table>
+      <div class="sig-line">
+        <div class="blk"><div class="ink">${v('b_sig')}</div><div class="rule">Signature of the head of institution</div></div>
+        <div class="blk"><div class="ink">${fmt(val('b_sig_date'))}</div><div class="rule">Date</div></div>
       </div>
-      <div class="sig-block">
-        ${fmt(val('b_sig_date')) || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
-        Date
-      </div>
-    </div>
+    </div>`;
 
-    <hr style="margin-top:30px"/>
-    <div class="part-title">Part C: Recommendation by Secretary / DGHS / Dean</div>
-    <p style="font-size:12px;margin-bottom:12px">
-      I, <strong>${val('c_authority_name') || '……………………………………………………………'}</strong>,
-      ${val('c_role') || '(Secretary, Ministry of Health / Director-General of Health Services / Dean, Faculty of Medicine)'}
-      ${val('c_faculty') ? ', ' + val('c_faculty') : ''},
-      recommend that <strong>${val('a_fullname') || '(applicant name)'}</strong> has applied to undergo postgraduate training at
-      <strong>${val('c_place') || '……………………………………'}</strong>
-      from <strong>${fmt(val('c_from')) || '……………'}</strong> to <strong>${fmt(val('c_to')) || '……………'}</strong>,
-      and request the SLMC to grant the applicant Temporary Registration under Section 67A of the Medical Ordinance.
-    </p>
-
-    <div class="preview-sig">
-      <div class="sig-block">
-        ${val('c_sig') || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
-        Signature
+  /* ── PAGE 4: Part C ── */
+  const roleLine = v('c_role') || 'Secretary, Ministry of Health / Director-General of Health Services / Dean, Faculty of Medicine';
+  const pageC = `
+    <div class="a4-page">${HEAD}
+      <div class="part-title">Part C. To be completed by the Secretary to the Ministry of Health, or the Director General of Health Services or the Dean of the Medical Faculty</div>
+      <div class="partc-para">
+        I, <span class="fill">${orDash(v('c_authority_name'))}</span><br><br>
+        ${roleLine}${v('c_faculty') ? ', <span class="fill">' + v('c_faculty') + '</span>' : ''} (delete inappropriate words) recommended that
+        <span class="fill">${orDash(v('a_fullname'))}</span> (name of applicant) has applied to undergo post graduate training at
+        <span class="fill">${orDash(v('c_place'))}</span> (place/hospital)
+        From <span class="fill">${fmt(val('c_from')) || '&nbsp;&nbsp;&nbsp;&nbsp;'}</span>
+        to <span class="fill">${fmt(val('c_to')) || '&nbsp;&nbsp;&nbsp;&nbsp;'}</span>
+        and request the SLMC to grant the applicant Temporary Registration under Section 67A of the Medical Ordinance.
       </div>
-      <div class="sig-block">
-        ${fmt(val('c_sig_date')) || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
-        Date
+      <div class="sig-line">
+        <div class="blk"><div class="ink">${v('c_sig')}</div><div class="rule">Signature</div></div>
+        <div class="blk"><div class="ink">${fmt(val('c_sig_date'))}</div><div class="rule">Date</div></div>
       </div>
-    </div>
-  `;
+    </div>`;
 
-  $('previewDoc').innerHTML = html;
+  /* ── ATTACHMENT PAGES ── */
+  let attHTML = '';
+  let count = 0;
+  Object.keys(DOC_LABELS).forEach(id => {
+    const files = attachments[id] || [];
+    files.forEach((f, i) => {
+      count++;
+      const suffix = files.length > 1 ? ` (${i + 1} of ${files.length})` : '';
+      const head = `<div class="att-head"><div class="att-no">Attachment ${count}</div><div class="att-title">${DOC_LABELS[id]}${suffix}</div></div>`;
+      let bodyHTML;
+      if (f.type && f.type.startsWith('image/')) {
+        bodyHTML = `<img class="att-img" src="${f.dataURL}" alt="${esc(f.name)}" />`;
+      } else if (f.type === 'application/pdf') {
+        bodyHTML = `<div class="att-note"><strong>PDF attachment:</strong> ${esc(f.name)}<br><br>This is a PDF file. Print it separately and attach it here, or use a PDF merge tool to combine it with this application. (Browsers cannot embed PDFs into a single print job.)</div>`;
+      } else {
+        bodyHTML = `<div class="att-note"><strong>Attached file:</strong> ${esc(f.name)}<br><br>This file type (${esc(f.type || 'unknown')}) cannot be previewed inline. Print it separately and attach it here.</div>`;
+      }
+      attHTML += `<div class="a4-page att-page">${HEAD}${head}${bodyHTML}</div>`;
+    });
+  });
+
+  $('previewDoc').innerHTML = pageA1 + pageA2 + pageB + pageC + attHTML;
 }
 </script>
 </body>
