@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SLMC – Temporary Registration 67A (C)</title>
+<style>
+  /* ── TOKENS ── */
+  :root {
+    --navy:   #1B2D4F;
+    --gold:   #C09B3A;
+    --cream:  #F7F4EE;
+    --white:  #FFFFFF;
+    --steel:  #4A5C78;
+    --mist:   #E8EBF0;
+    --error:  #B53B2E;
+    --body:   #2C2C2C;
+    --radius: 4px;
+    --shadow: 0 2px 10px rgba(27,45,79,.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: var(--cream); color: var(--body); font-size: 15px; line-height: 1.6; }
+
+  /* ── HEADER ── */
+  header { background: var(--navy); color: var(--white); padding: 28px 40px; display: flex; align-items: center; gap: 24px; border-bottom: 4px solid var(--gold); }
+  header img { width: 70px; height: 70px; object-fit: contain; border-radius: 50%; background: white; padding: 6px; }
+  .header-text h1 { font-size: 1.25rem; letter-spacing: .04em; text-transform: uppercase; }
+  .header-text p  { font-size: .82rem; color: #CBD5E0; margin-top: 3px; font-family: 'Arial', sans-serif; }
+
+  /* ── TABS ── */
+  .tab-bar { display: flex; background: var(--navy); padding: 0 40px; border-bottom: 3px solid var(--gold); }
+  .tab-btn { padding: 12px 22px; color: #8FA0BB; font-size: .85rem; font-family: 'Arial', sans-serif; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: color .2s, border-color .2s; }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .tab-btn:hover:not(.active) { color: #CBD5E0; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 960px; margin: 36px auto; padding: 0 20px 60px; }
+  .section-card { background: var(--white); border: 1px solid var(--mist); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 28px; overflow: hidden; }
+  .section-title { background: var(--navy); color: var(--white); padding: 12px 24px; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; font-family: 'Arial', sans-serif; display: flex; align-items: center; gap: 10px; }
+  .section-title .badge { background: var(--gold); color: var(--navy); font-weight: 700; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: .7rem; flex-shrink: 0; }
+  .section-body { padding: 24px 28px; }
+
+  /* ── FORM FIELDS ── */
+  .row { display: grid; gap: 16px; margin-bottom: 16px; }
+  .row.col-1 { grid-template-columns: 1fr; }
+  .row.col-2 { grid-template-columns: 1fr 1fr; }
+  .row.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .row.col-13 { grid-template-columns: 1fr 3fr; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: .78rem; font-family: 'Arial', sans-serif; letter-spacing: .04em; text-transform: uppercase; color: var(--steel); font-weight: 600; }
+  .field label span.req { color: var(--error); margin-left: 2px; }
+  .field input, .field select, .field textarea { border: 1px solid #C8D0DC; border-radius: var(--radius); padding: 9px 12px; font-size: .92rem; font-family: 'Georgia', serif; color: var(--body); background: var(--white); width: 100%; transition: border-color .2s, box-shadow .2s; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(27,45,79,.12); }
+  .field textarea { resize: vertical; min-height: 80px; }
+  .field .hint { font-size: .75rem; color: #7A8DA5; font-family: 'Arial', sans-serif; }
+
+  /* ── FILE UPLOAD ── */
+  .upload-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .upload-item { border: 1.5px dashed #C8D0DC; border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; background: var(--cream); transition: border-color .2s; }
+  .upload-item:hover { border-color: var(--navy); }
+  .upload-item label { font-size: .75rem; font-family: 'Arial', sans-serif; color: var(--steel); font-weight: 600; letter-spacing: .03em; }
+  .upload-item input[type=file] { font-size: .78rem; font-family: 'Arial', sans-serif; color: var(--steel); }
+
+  /* ── DECLARATION ── */
+  .declaration { background: #F0F3F8; border-left: 4px solid var(--gold); padding: 16px 20px; border-radius: var(--radius); font-size: .88rem; color: var(--steel); margin-bottom: 16px; }
+  .sig-row { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: end; }
+
+  /* ── ACTIONS ── */
+  .actions { display: flex; gap: 14px; justify-content: flex-end; margin-top: 8px; }
+  .btn { padding: 11px 28px; border-radius: var(--radius); border: none; font-family: 'Arial', sans-serif; font-size: .88rem; letter-spacing: .05em; text-transform: uppercase; cursor: pointer; font-weight: 600; transition: background .2s, transform .1s; }
+  .btn:active { transform: scale(.98); }
+  .btn-outline { background: transparent; border: 2px solid var(--navy); color: var(--navy); }
+  .btn-outline:hover { background: var(--mist); }
+  .btn-primary { background: var(--navy); color: var(--white); }
+  .btn-primary:hover { background: var(--steel); }
+  .btn-gold { background: var(--gold); color: var(--navy); }
+  .btn-gold:hover { background: #A8852E; }
+
+  /* ── PROGRESS ── */
+  .progress-bar { background: var(--mist); height: 5px; border-radius: 3px; margin-bottom: 28px; }
+  .progress-fill { height: 100%; background: var(--gold); border-radius: 3px; transition: width .4s ease; }
+  .progress-label { font-size: .78rem; font-family: 'Arial', sans-serif; color: var(--steel); margin-bottom: 6px; }
+
+  /* ── NOTICE ── */
+  .notice { background: #EBF0F8; border: 1px solid #B8C8E0; border-radius: var(--radius); padding: 16px 20px; margin-bottom: 28px; }
+  .notice h3 { font-size: .85rem; letter-spacing: .06em; text-transform: uppercase; color: var(--navy); margin-bottom: 8px; }
+  .notice ol { padding-left: 18px; }
+  .notice ol li { font-size: .85rem; color: var(--steel); margin-bottom: 5px; font-family: 'Arial', sans-serif; }
+
+  /* ── PREVIEW ── */
+  #preview-pane { display: none; }
+  .preview-doc { max-width: 800px; margin: 0 auto; background: white; border: 1px solid #ccc; padding: 48px 56px; font-family: 'Times New Roman', serif; font-size: 13px; line-height: 1.6; color: #000; box-shadow: 0 4px 20px rgba(0,0,0,.15); }
+  .preview-doc h2 { text-align: center; font-size: 14px; margin-bottom: 6px; letter-spacing: .02em; }
+  .preview-doc .sub { text-align: center; font-size: 12px; margin-bottom: 4px; }
+  .preview-doc .italic { font-style: italic; }
+  .preview-doc hr { border: none; border-top: 1px solid #000; margin: 14px 0; }
+  .preview-doc .part-title { font-weight: bold; text-decoration: underline; font-size: 12px; margin: 18px 0 10px; }
+  .preview-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
+  .preview-table td { border: 1px solid #999; padding: 5px 8px; font-size: 12px; vertical-align: top; }
+  .preview-table td:first-child { font-weight: bold; width: 45%; background: #F8F8F8; }
+  .preview-sig { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 30px; }
+  .preview-sig .sig-block { border-top: 1px solid #000; padding-top: 4px; font-size: 11px; }
+  .doc-ref { text-align: right; font-size: 10px; color: #666; margin-bottom: 6px; }
+  .print-actions { text-align: right; margin-bottom: 16px; display: flex; gap: 10px; justify-content: flex-end; }
+
+  @media print { header, .tab-bar, .container > *:not(#preview-pane), .print-actions, .tab-btn { display: none !important; } #preview-pane { display: block !important; } .preview-doc { box-shadow: none; border: none; padding: 20px; } }
+  @media (max-width: 640px) { .row.col-2, .row.col-3, .row.col-13, .sig-row { grid-template-columns: 1fr; } header { flex-direction: column; text-align: center; padding: 20px; } .tab-bar { overflow-x: auto; } }
+
+  /* ── PANE VISIBILITY ── */
+  .pane { display: none; }
+  .pane.active { display: block; }
+
+  /* checkmark step */
+  .steps { display: flex; gap: 8px; margin-bottom: 24px; }
+  .step { flex: 1; text-align: center; }
+  .step-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--mist); border: 2px solid #C8D0DC; display: inline-flex; align-items: center; justify-content: center; font-size: .7rem; font-weight: 700; font-family: 'Arial', sans-serif; color: var(--steel); }
+  .step.done .step-dot { background: var(--gold); border-color: var(--gold); color: white; }
+  .step.active .step-dot { background: var(--navy); border-color: var(--navy); color: white; }
+  .step-lbl { font-size: .68rem; font-family: 'Arial', sans-serif; color: var(--steel); margin-top: 4px; letter-spacing: .03em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-text">
+    <h1>Sri Lanka Medical Council</h1>
+    <p>Temporary Registration — Section 67A | Category C &nbsp;·&nbsp; Approved 25.01.2019</p>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('form')">Application Form</button>
+  <button class="tab-btn" onclick="switchTab('preview')" id="previewTab">Preview &amp; Print</button>
+</div>
+
+<!-- ════════════════════ FORM PANE ════════════════════ -->
+<div class="container">
+<div class="pane active" id="form-pane">
+
+  <!-- NOTICE -->
+  <div class="notice">
+    <h3>Before you begin</h3>
+    <ol>
+      <li>Temporary Registration is granted for a maximum of <strong>12 months</strong>, restricted to the specified institution.</li>
+      <li>All documents must be originals or certified copies. Certificate of Good Standing must be issued within the last 6 months.</li>
+      <li>Registration fee: <strong>Rs 38,500.00</strong> per applicant. Attach proof of payment.</li>
+      <li>Submit renewal applications at least <strong>4 weeks</strong> before expiry through the same authorities.</li>
+    </ol>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps">
+    <div class="step active" id="step1"><div class="step-dot">A</div><div class="step-lbl">Part A – Applicant</div></div>
+    <div class="step" id="step2"><div class="step-dot">B</div><div class="step-lbl">Part B – Sponsor</div></div>
+    <div class="step" id="step3"><div class="step-dot">C</div><div class="step-lbl">Part C – Authority</div></div>
+    <div class="step" id="step4"><div class="step-dot">D</div><div class="step-lbl">Documents</div></div>
+  </div>
+
+  <!-- ── PART A ── -->
+  <div id="partA">
+  <div class="section-card">
+    <div class="section-title"><span class="badge">A</span> Part A — To be completed by the Applicant</div>
+    <div class="section-body">
+
+      <div class="row col-1">
+        <div class="field">
+          <label>1. Full name (underline / indicate family name) <span class="req">*</span></label>
+          <input type="text" id="a_fullname" placeholder="e.g. PERERA, Nimal Bandara" />
+        </div>
+      </div>
+
+      <div class="row col-3">
+        <div class="field">
+          <label>2a. Date of birth <span class="req">*</span></label>
+          <input type="date" id="a_dob" />
+        </div>
+        <div class="field">
+          <label>2b. Age (years)</label>
+          <input type="number" id="a_age" min="0" max="120" placeholder="Age" readonly />
+        </div>
+        <div class="field">
+          <label>2c. Sex <span class="req">*</span></label>
+          <select id="a_sex">
+            <option value="">— Select —</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>3. Nationality <span class="req">*</span></label>
+          <input type="text" id="a_nationality" placeholder="e.g. Indian" />
+        </div>
+        <div class="field">
+          <label>4. Passport number <span class="req">*</span></label>
+          <input type="text" id="a_passport" placeholder="Passport No." />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>5. Permanent address <span class="req">*</span></label>
+          <textarea id="a_perm_address" rows="2" placeholder="Full permanent home address"></textarea>
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>6. Address in Sri Lanka (if known)</label>
+          <textarea id="a_sl_address" rows="2" placeholder="Sri Lanka address during stay"></textarea>
+        </div>
+      </div>
+
+      <div class="row col-3">
+        <div class="field">
+          <label>7a. Fixed line</label>
+          <input type="tel" id="a_tel_fixed" placeholder="+94 11 xxxxxxx" />
+        </div>
+        <div class="field">
+          <label>7b. Mobile <span class="req">*</span></label>
+          <input type="tel" id="a_tel_mobile" placeholder="+94 7x xxxxxxx" />
+        </div>
+        <div class="field">
+          <label>8. Email address <span class="req">*</span></label>
+          <input type="email" id="a_email" placeholder="name@example.com" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>9. Institution where first medical degree was obtained <span class="req">*</span></label>
+          <input type="text" id="a_degree_institution" placeholder="University / Medical School name" />
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>10. Name of first medical degree <span class="req">*</span></label>
+          <input type="text" id="a_degree_name" placeholder="e.g. MBBS, BDS, BSc Nursing" />
+        </div>
+        <div class="field">
+          <label>11. Year degree obtained <span class="req">*</span></label>
+          <input type="number" id="a_degree_year" min="1950" max="2030" placeholder="YYYY" />
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>12a. Medical Council (first license) <span class="req">*</span></label>
+          <input type="text" id="a_council" placeholder="Name of Medical / Dental / Nursing Council" />
+        </div>
+        <div class="field">
+          <label>12b. Registration number <span class="req">*</span></label>
+          <input type="text" id="a_council_reg" placeholder="Council registration number" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>13. Current employment</label>
+          <input type="text" id="a_employment" placeholder="Designation, Department, Institution, Country" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>14. Nature of clinical work / personal education and training in Sri Lanka <span class="req">*</span></label>
+          <textarea id="a_clinical_work" rows="3" placeholder="Describe the postgraduate education, training, or clinical activities planned"></textarea>
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>15. Hospital / institution in which applicant will work <span class="req">*</span></label>
+          <input type="text" id="a_hospital" placeholder="Full name of hospital / institution" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>16. Sponsor (Medical Faculty / PGIM / Professional body) <span class="req">*</span></label>
+          <input type="text" id="a_sponsor" placeholder="Name of sponsoring faculty or body" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>17. Sri Lankan specialist who will supervise clinical activities <span class="req">*</span></label>
+          <input type="text" id="a_supervisor" placeholder="Full name, designation, contact details" />
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>18a. Period — From <span class="req">*</span></label>
+          <input type="date" id="a_period_from" />
+        </div>
+        <div class="field">
+          <label>18b. Period — To <span class="req">*</span></label>
+          <input type="date" id="a_period_to" />
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>19. Any previous SLMC registrations? <span class="req">*</span></label>
+          <select id="a_prev_reg" onchange="toggleField('a_prev_reg_details', this.value === 'Yes')">
+            <option value="">— Select —</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div class="field" id="a_prev_reg_details" style="display:none">
+          <label>20. If yes — Registration number &amp; dates</label>
+          <input type="text" id="a_prev_reg_info" placeholder="Registration No. and period" />
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>21. All requested documents enclosed?</label>
+          <select id="a_docs_enclosed">
+            <option value="">— Select —</option>
+            <option>Yes</option>
+            <option>No – see reason below</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>22. Receipt of payment attached?</label>
+          <select id="a_receipt">
+            <option value="">— Select —</option>
+            <option>Yes</option>
+            <option>No – see reason below</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>Reasons (if any documents / receipt not enclosed)</label>
+          <textarea id="a_reasons" rows="2" placeholder="State reason(s) for missing documents or payment receipt"></textarea>
+        </div>
+      </div>
+
+      <!-- DECLARATION -->
+      <div class="declaration">
+        I certify that the information given above and the documents submitted by me are accurate and true.
+      </div>
+      <div class="sig-row">
+        <div class="field">
+          <label>Signature of Applicant</label>
+          <input type="text" id="a_sig" placeholder="Type full name as signature" />
+        </div>
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="a_sig_date" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div><!-- /partA -->
+
+  <!-- ── PART B ── -->
+  <div id="partB">
+  <div class="section-card">
+    <div class="section-title"><span class="badge">B</span> Part B — To be completed by Dean / Director / PGIM / President of Professional Body (Sponsor)</div>
+    <div class="section-body">
+
+      <div class="row col-1">
+        <div class="field">
+          <label>1. Name of Institution (Faculty / PGIM / Professional Body) <span class="req">*</span></label>
+          <input type="text" id="b_institution" placeholder="Full name of institution" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>2. Address of Institution <span class="req">*</span></label>
+          <textarea id="b_address" rows="2" placeholder="Full address"></textarea>
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>3. Telephone number of Institution</label>
+          <input type="tel" id="b_tel" placeholder="+94 xx xxxxxxx" />
+        </div>
+        <div class="field">
+          <label>4. Name of head of institution (Dean / Director / President) <span class="req">*</span></label>
+          <input type="text" id="b_head_name" placeholder="Full name and title" />
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>6a. Office telephone</label>
+          <input type="tel" id="b_head_tel_office" placeholder="+94 xx xxxxxxx" />
+        </div>
+        <div class="field">
+          <label>6b. Mobile</label>
+          <input type="tel" id="b_head_tel_mobile" placeholder="+94 7x xxxxxxx" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>7. Email address of head of institution <span class="req">*</span></label>
+          <input type="email" id="b_head_email" placeholder="dean@faculty.lk" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>8. Nature of work, clinical responsibilities and duties <span class="req">*</span></label>
+          <textarea id="b_work_nature" rows="3" placeholder="Detailed description of clinical work, responsibilities and duties assigned to the applicant"></textarea>
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>9. Specialist who will supervise clinical activities <span class="req">*</span></label>
+          <input type="text" id="b_supervisor" placeholder="Full name, designation, speciality" />
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>10a. Duration — From <span class="req">*</span></label>
+          <input type="date" id="b_from" />
+        </div>
+        <div class="field">
+          <label>10b. Duration — To <span class="req">*</span></label>
+          <input type="date" id="b_to" />
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>11. Applicant previously employed in same capacity?</label>
+          <select id="b_prev_emp" onchange="toggleField('b_prev_emp_details', this.value === 'Yes')">
+            <option value="">— Select —</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+        <div class="field" id="b_prev_emp_details" style="display:none">
+          <label>12. If yes, provide details</label>
+          <input type="text" id="b_prev_details" placeholder="Period, capacity, registration number" />
+        </div>
+      </div>
+
+      <div class="sig-row" style="margin-top:18px">
+        <div class="field">
+          <label>Signature of Head of Institution</label>
+          <input type="text" id="b_sig" placeholder="Type full name as signature" />
+        </div>
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="b_sig_date" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div><!-- /partB -->
+
+  <!-- ── PART C ── -->
+  <div id="partC">
+  <div class="section-card">
+    <div class="section-title"><span class="badge">C</span> Part C — To be completed by Secretary to Ministry of Health / DGHS / Dean of Medical Faculty</div>
+    <div class="section-body">
+
+      <div class="row col-1">
+        <div class="field">
+          <label>Recommending authority — full name and designation <span class="req">*</span></label>
+          <input type="text" id="c_authority_name" placeholder="e.g. Dr. Nimal Silva, Director-General of Health Services" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>Role of recommending authority <span class="req">*</span></label>
+          <select id="c_role">
+            <option value="">— Select —</option>
+            <option>Secretary, Ministry of Health</option>
+            <option>Director-General of Health Services</option>
+            <option>Dean, Faculty of Medicine</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>Faculty of Medicine (if applicable)</label>
+          <input type="text" id="c_faculty" placeholder="Name of Faculty of Medicine (if Dean)" />
+        </div>
+      </div>
+
+      <div class="row col-1">
+        <div class="field">
+          <label>Place / Hospital for postgraduate training <span class="req">*</span></label>
+          <input type="text" id="c_place" placeholder="Hospital or institution name" />
+        </div>
+      </div>
+
+      <div class="row col-2">
+        <div class="field">
+          <label>Training — From <span class="req">*</span></label>
+          <input type="date" id="c_from" />
+        </div>
+        <div class="field">
+          <label>Training — To <span class="req">*</span></label>
+          <input type="date" id="c_to" />
+        </div>
+      </div>
+
+      <div class="sig-row" style="margin-top:18px">
+        <div class="field">
+          <label>Signature</label>
+          <input type="text" id="c_sig" placeholder="Type full name as signature" />
+        </div>
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="c_sig_date" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div><!-- /partC -->
+
+  <!-- ── DOCUMENTS ── -->
+  <div id="partDocs">
+  <div class="section-card">
+    <div class="section-title"><span class="badge">D</span> Supporting Documents — Upload</div>
+    <div class="section-body">
+      <p style="font-size:.84rem;color:var(--steel);font-family:Arial,sans-serif;margin-bottom:16px">Upload scanned copies (PDF or image). Originals / certified copies are required at submission.</p>
+      <div class="upload-grid">
+        <div class="upload-item"><label>a. Certificate of first medical / dental / nursing degree <span class="req">*</span></label><input type="file" accept=".pdf,.jpg,.jpeg,.png" id="doc_a" /></div>
+        <div class="upload-item"><label>b. Certificate of registration from Council of country of residence <span class="req">*</span></label><input type="file" accept=".pdf,.jpg,.jpeg,.png" id="doc_b" /></div>
+        <div class="upload-item"><label>c. Certificate of Good Standing (issued within 6 months) <span class="req">*</span></label><input type="file" accept=".pdf,.jpg,.jpeg,.png" id="doc_c" /></div>
+        <div class="upload-item"><label>d. Certificate(s) of postgraduate degree(s) (if applicable)</label><input type="file" accept=".pdf,.jpg,.jpeg,.png" id="doc_d" multiple /></div>
+        <div class="upload-item"><label>e. Letter from current employer <span class="req">*</span></label><input type="file" accept=".pdf,.jpg,.jpeg,.png" id="doc_e" /></div>
+        <div class="upload-item"><label>f. Curriculum vitae <span class="req">*</span></label><input type="file" accept=".pdf,.doc,.docx" id="doc_f" /></div>
+        <div class="upload-item"><label>g. Copy of business pages of passport <span class="req">*</span></label><input type="file" accept=".pdf,.jpg,.jpeg,.png" id="doc_g" /></div>
+        <div class="upload-item"><label>h. Letter of agreement from Sri Lankan specialist (supervisor) <span class="req">*</span></label><input type="file" accept=".pdf,.jpg,.jpeg,.png" id="doc_h" /></div>
+        <div class="upload-item"><label>i. Receipt of payment of registration fee (Rs 38,500) <span class="req">*</span></label><input type="file" accept=".pdf,.jpg,.jpeg,.png" id="doc_i" /></div>
+      </div>
+    </div>
+  </div>
+  </div><!-- /partDocs -->
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button class="btn btn-outline" onclick="resetForm()">Clear Form</button>
+    <button class="btn btn-gold" onclick="submitForm()">Preview &amp; Submit →</button>
+  </div>
+
+</div><!-- /form-pane -->
+
+<!-- ════════════════════ PREVIEW PANE ════════════════════ -->
+<div class="pane" id="preview-pane">
+  <div class="print-actions">
+    <button class="btn btn-outline" onclick="switchTab('form')">← Edit Form</button>
+    <button class="btn btn-primary" onclick="window.print()">🖨 Print / Save PDF</button>
+  </div>
+
+  <div class="preview-doc" id="previewDoc">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+/* ── UTILITIES ── */
+const $ = id => document.getElementById(id);
+const val = id => ($( id)?.value ?? '').trim();
+const fmt = dateStr => { if (!dateStr) return ''; const [y,m,d] = dateStr.split('-'); return `${d}/${m}/${y}`; };
+
+function toggleField(id, show) { const el = $(id); if (el) el.style.display = show ? 'flex' : 'none'; }
+
+/* auto-age */
+$('a_dob').addEventListener('change', function() {
+  const dob = new Date(this.value);
+  const today = new Date();
+  let age = today.getFullYear() - dob.getFullYear();
+  const m = today.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+  $('a_age').value = isNaN(age) || age < 0 ? '' : age;
+});
+
+/* ── TAB SWITCH ── */
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  if (tab === 'form') {
+    $('form-pane').classList.add('active');
+    document.querySelectorAll('.tab-btn')[0].classList.add('active');
+  } else {
+    buildPreview();
+    $('preview-pane').classList.add('active');
+    document.querySelectorAll('.tab-btn')[1].classList.add('active');
+  }
+}
+
+/* ── RESET ── */
+function resetForm() {
+  if (!confirm('Clear all form data?')) return;
+  document.querySelectorAll('input:not([type=file]), select, textarea').forEach(el => el.value = '');
+  document.querySelectorAll('[style*="display"]').forEach(el => el.style.display = 'none');
+}
+
+/* ── SUBMIT → PREVIEW ── */
+function submitForm() {
+  if (!val('a_fullname') || !val('a_dob') || !val('a_nationality') || !val('a_passport')) {
+    alert('Please complete the required fields in Part A before previewing.');
+    return;
+  }
+  switchTab('preview');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── BUILD PREVIEW ── */
+function buildPreview() {
+  const prevReg = val('a_prev_reg') === 'Yes' ? `Yes — ${val('a_prev_reg_info') || 'details not provided'}` : (val('a_prev_reg') || '—');
+  const bPrevEmp = val('b_prev_emp') === 'Yes' ? `Yes — ${val('b_prev_details') || 'details not provided'}` : (val('b_prev_emp') || '—');
+
+  const row = (label, value) => `<tr><td>${label}</td><td>${value || '—'}</td></tr>`;
+
+  const html = `
+    <div class="doc-ref">Temporary Registration 67A (C) &nbsp;·&nbsp; Approved by SLMC on 25.01.2019</div>
+    <h2>SRI LANKA MEDICAL COUNCIL</h2>
+    <div class="sub">TEMPORARY REGISTRATION AS A MEDICAL PRACTITIONER, DENTIST OR NURSE</div>
+    <div class="sub">FOR NON-REMUNERATIVE PURPOSES IN SRI LANKA (CATEGORY C)</div>
+    <hr />
+
+    <div class="part-title">Annex 1 — Part A: Completed by Applicant</div>
+    <table class="preview-table">
+      ${row('1. Full name (family name underlined)', val('a_fullname'))}
+      ${row('2. Date of birth / Age / Sex', `${fmt(val('a_dob'))} &nbsp;|&nbsp; ${val('a_age') ? val('a_age') + ' years' : '—'} &nbsp;|&nbsp; ${val('a_sex') || '—'}`)}
+      ${row('3. Nationality', val('a_nationality'))}
+      ${row('4. Passport number', val('a_passport'))}
+      ${row('5. Permanent address', val('a_perm_address').replace(/\n/g,'<br>'))}
+      ${row('6. Address in Sri Lanka', val('a_sl_address').replace(/\n/g,'<br>') || '—')}
+      ${row('7. Telephone', `Fixed: ${val('a_tel_fixed') || '—'} &nbsp;|&nbsp; Mobile: ${val('a_tel_mobile') || '—'}`)}
+      ${row('8. Email address', val('a_email'))}
+      ${row('9. Institution (first medical degree)', val('a_degree_institution'))}
+      ${row('10. Name of first medical degree', val('a_degree_name'))}
+      ${row('11. Year degree obtained', val('a_degree_year'))}
+      ${row('12. Medical Council &amp; registration number', `${val('a_council') || '—'} &nbsp;·&nbsp; Reg. No: ${val('a_council_reg') || '—'}`)}
+      ${row('13. Current employment', val('a_employment') || '—')}
+      ${row('14. Nature of clinical work / education &amp; training', val('a_clinical_work').replace(/\n/g,'<br>'))}
+      ${row('15. Hospital / institution in Sri Lanka', val('a_hospital'))}
+      ${row('16. Sponsor', val('a_sponsor'))}
+      ${row('17. Sri Lankan specialist — supervisor', val('a_supervisor'))}
+      ${row('18. Period of temporary registration', `From: ${fmt(val('a_period_from'))} &nbsp; To: ${fmt(val('a_period_to'))}`)}
+      ${row('19–20. Previous SLMC registrations', prevReg)}
+      ${row('21. All documents enclosed', val('a_docs_enclosed') || '—')}
+      ${row('22. Receipt of payment attached', val('a_receipt') || '—')}
+      ${val('a_reasons') ? row('Reasons (missing items)', val('a_reasons')) : ''}
+    </table>
+
+    <div class="preview-sig">
+      <div class="sig-block">
+        ${val('a_sig') || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
+        Signature of Applicant
+      </div>
+      <div class="sig-block">
+        ${fmt(val('a_sig_date')) || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
+        Date
+      </div>
+    </div>
+
+    <hr style="margin-top:30px"/>
+    <div class="part-title">Part B: Completed by Head of Sponsoring Institution</div>
+    <table class="preview-table">
+      ${row('1. Name of Institution', val('b_institution'))}
+      ${row('2. Address of Institution', val('b_address').replace(/\n/g,'<br>'))}
+      ${row('3. Telephone', val('b_tel') || '—')}
+      ${row('4. Head of institution', val('b_head_name'))}
+      ${row('6. Telephone (office / mobile)', `${val('b_head_tel_office') || '—'} / ${val('b_head_tel_mobile') || '—'}`)}
+      ${row('7. Email', val('b_head_email'))}
+      ${row('8. Nature of work / responsibilities', val('b_work_nature').replace(/\n/g,'<br>'))}
+      ${row('9. Supervising specialist', val('b_supervisor'))}
+      ${row('10. Duration', `From: ${fmt(val('b_from'))} &nbsp; To: ${fmt(val('b_to'))}`)}
+      ${row('11–12. Previously employed in same capacity', bPrevEmp)}
+    </table>
+
+    <div class="preview-sig">
+      <div class="sig-block">
+        ${val('b_sig') || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
+        Signature of Head of Institution
+      </div>
+      <div class="sig-block">
+        ${fmt(val('b_sig_date')) || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
+        Date
+      </div>
+    </div>
+
+    <hr style="margin-top:30px"/>
+    <div class="part-title">Part C: Recommendation by Secretary / DGHS / Dean</div>
+    <p style="font-size:12px;margin-bottom:12px">
+      I, <strong>${val('c_authority_name') || '……………………………………………………………'}</strong>,
+      ${val('c_role') || '(Secretary, Ministry of Health / Director-General of Health Services / Dean, Faculty of Medicine)'}
+      ${val('c_faculty') ? ', ' + val('c_faculty') : ''},
+      recommend that <strong>${val('a_fullname') || '(applicant name)'}</strong> has applied to undergo postgraduate training at
+      <strong>${val('c_place') || '……………………………………'}</strong>
+      from <strong>${fmt(val('c_from')) || '……………'}</strong> to <strong>${fmt(val('c_to')) || '……………'}</strong>,
+      and request the SLMC to grant the applicant Temporary Registration under Section 67A of the Medical Ordinance.
+    </p>
+
+    <div class="preview-sig">
+      <div class="sig-block">
+        ${val('c_sig') || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
+        Signature
+      </div>
+      <div class="sig-block">
+        ${fmt(val('c_sig_date')) || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}<br />
+        Date
+      </div>
+    </div>
+  `;
+
+  $('previewDoc').innerHTML = html;
+}
+</script>
+</body>
+</html>
