@@ -103,10 +103,12 @@
   .off-table td.val { font-weight: bold; }
   .off-table tr.grouphdr td { background: #D9D9D9; font-weight: bold; }
   .certify { font-size: 12px; margin: 18px 0 6px; }
-  .sig-line { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 34px; }
+  .sig-line { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-top: 34px; align-items: end; }
   .sig-line .blk { font-size: 11.5px; }
-  .sig-line .blk .ink { font-family: 'Georgia', serif; font-style: italic; font-size: 14px; min-height: 20px; }
+  .sig-line .blk .ink { font-family: 'Georgia', serif; font-style: italic; font-size: 14px; min-height: 46px; display: flex; align-items: flex-end; }
+  .sig-line .blk .ink img { height: 42px; display: block; }
   .sig-line .blk .rule { border-top: 1px solid #000; margin-top: 2px; padding-top: 3px; }
+  .sig-line .blk .signame { margin-top: 3px; font-weight: bold; }
   .docs-list { margin: 8px 0 0 0; }
   .docs-list .dh { font-weight: bold; font-size: 12.5px; margin-bottom: 8px; }
   .docs-list ol { padding-left: 26px; }
@@ -309,32 +311,32 @@
       <div class="row col-1">
         <div class="field">
           <label>15. Hospital / institution in which applicant will work <span class="req">*</span></label>
-          <input type="text" id="a_hospital" placeholder="Full name of hospital / institution" />
+          <input type="text" id="a_hospital" placeholder="Full name of hospital / institution" value="Global Ehsan Relief - Sri Lanka, Abdul Majeed Road, Kinniya - 04." />
         </div>
       </div>
 
       <div class="row col-1">
         <div class="field">
           <label>16. Sponsor (Medical Faculty / PGIM / Professional body) <span class="req">*</span></label>
-          <input type="text" id="a_sponsor" placeholder="Name of sponsoring faculty or body" />
+          <input type="text" id="a_sponsor" placeholder="Name of sponsoring faculty or body" value="Global Ehsan Relief - Sri Lanka" />
         </div>
       </div>
 
       <div class="row col-1">
         <div class="field">
           <label>17. Sri Lankan specialist who will supervise clinical activities <span class="req">*</span></label>
-          <input type="text" id="a_supervisor" placeholder="Full name, designation, contact details" />
+          <input type="text" id="a_supervisor" placeholder="Full name, designation, contact details" value="Dr. K. Jayanthan (Consultant Surgeon)" />
         </div>
       </div>
 
       <div class="row col-2">
         <div class="field">
           <label>18a. Period — From <span class="req">*</span></label>
-          <input type="date" id="a_period_from" />
+          <input type="date" id="a_period_from" value="2026-09-23" />
         </div>
         <div class="field">
           <label>18b. Period — To <span class="req">*</span></label>
-          <input type="date" id="a_period_to" />
+          <input type="date" id="a_period_to" value="2026-09-27" />
         </div>
       </div>
 
@@ -407,68 +409,74 @@
       <div class="row col-1">
         <div class="field">
           <label>1. Name of Institution (Faculty / PGIM / Professional Body) <span class="req">*</span></label>
-          <input type="text" id="b_institution" placeholder="Full name of institution" />
+          <input type="text" id="b_institution" placeholder="Full name of institution" value="Global Ehsan Relief - Sri Lanka" />
         </div>
       </div>
 
       <div class="row col-1">
         <div class="field">
           <label>2. Address of Institution <span class="req">*</span></label>
-          <textarea id="b_address" rows="2" placeholder="Full address"></textarea>
+          <textarea id="b_address" rows="2" placeholder="Full address">Abdul Majeed Road, Kinniya - 04.</textarea>
         </div>
       </div>
 
       <div class="row col-2">
         <div class="field">
           <label>3. Telephone number of Institution</label>
-          <input type="tel" id="b_tel" placeholder="+94 xx xxxxxxx" />
+          <input type="tel" id="b_tel" placeholder="+94 xx xxxxxxx" value="026 2236220" />
         </div>
         <div class="field">
           <label>4. Name of head of institution (Dean / Director / President) <span class="req">*</span></label>
-          <input type="text" id="b_head_name" placeholder="Full name and title" />
+          <input type="text" id="b_head_name" placeholder="Full name and title" value="Mr. T.M. Jarook" />
         </div>
       </div>
 
       <div class="row col-2">
         <div class="field">
           <label>6a. Office telephone</label>
-          <input type="tel" id="b_head_tel_office" placeholder="+94 xx xxxxxxx" />
+          <input type="tel" id="b_head_tel_office" placeholder="+94 xx xxxxxxx" value="026 2236220" />
         </div>
         <div class="field">
           <label>6b. Mobile</label>
-          <input type="tel" id="b_head_tel_mobile" placeholder="+94 7x xxxxxxx" />
+          <input type="tel" id="b_head_tel_mobile" placeholder="+94 7x xxxxxxx" value="077 7030822" />
         </div>
       </div>
 
       <div class="row col-1">
         <div class="field">
           <label>7. Email address of head of institution <span class="req">*</span></label>
-          <input type="email" id="b_head_email" placeholder="dean@faculty.lk" />
+          <input type="email" id="b_head_email" placeholder="dean@faculty.lk" value="mjarook@global-ehsan-relief.org.lk" />
         </div>
       </div>
 
       <div class="row col-1">
         <div class="field">
           <label>8. Nature of work, clinical responsibilities and duties <span class="req">*</span></label>
-          <textarea id="b_work_nature" rows="3" placeholder="Detailed description of clinical work, responsibilities and duties assigned to the applicant"></textarea>
+          <textarea id="b_work_nature" rows="6" placeholder="Detailed description of clinical work, responsibilities and duties assigned to the applicant">Primary health care.
+
+Duties and responsibilities:
+General Practitioners / Internal Medicine: Outpatient consultations, chronic disease management, health education.
+Ophthalmologists: Eye screening, preoperative assessment, cataract surgery, postoperative follow-up.
+Optometrists / Orthoptists: Vision assessment, refraction, screening for ocular diseases, patient counselling.
+Dentists: Dental examination, extractions, restorations, preventive dental care and oral health education.</textarea>
         </div>
       </div>
 
       <div class="row col-1">
         <div class="field">
           <label>9. Specialist who will supervise clinical activities <span class="req">*</span></label>
-          <input type="text" id="b_supervisor" placeholder="Full name, designation, speciality" />
+          <input type="text" id="b_supervisor" placeholder="Full name, designation, speciality" value="Dr. K. Jayanthan (Consultant Surgeon)" />
         </div>
       </div>
 
       <div class="row col-2">
         <div class="field">
           <label>10a. Duration — From <span class="req">*</span></label>
-          <input type="date" id="b_from" />
+          <input type="date" id="b_from" value="2026-09-23" />
         </div>
         <div class="field">
           <label>10b. Duration — To <span class="req">*</span></label>
-          <input type="date" id="b_to" />
+          <input type="date" id="b_to" value="2026-09-27" />
         </div>
       </div>
 
@@ -478,7 +486,7 @@
           <select id="b_prev_emp" onchange="toggleField('b_prev_emp_details', this.value === 'Yes')">
             <option value="">— Select —</option>
             <option>Yes</option>
-            <option>No</option>
+            <option selected>No</option>
           </select>
         </div>
         <div class="field" id="b_prev_emp_details" style="display:none">
@@ -490,11 +498,15 @@
       <div class="sig-row" style="margin-top:18px">
         <div class="field">
           <label>Signature of Head of Institution</label>
-          <input type="text" id="b_sig" placeholder="Type full name as signature" />
+          <div style="border:1px solid #C8D0DC;border-radius:var(--radius);padding:8px 12px;background:var(--white);display:flex;align-items:center;gap:12px">
+            <img src="jarook-sign-01.png" alt="Signature of Mr. T.M. Jarook" style="height:46px" />
+            <span style="font-size:.82rem;color:var(--steel)">Mr. T.M. Jarook</span>
+          </div>
+          <span class="hint">Embedded signature — also rendered on the printout.</span>
         </div>
         <div class="field">
           <label>Date</label>
-          <input type="date" id="b_sig_date" />
+          <input type="date" id="b_sig_date" value="2026-06-22" />
         </div>
       </div>
 
@@ -693,6 +705,9 @@ const DOCREF = 'Temporary Registration 67A (C)';
 const FOOT = 'Approved by SLMC on 25.01.2019';
 const HEAD = `<div class="pg-tag">${DOCREF}</div><div class="pg-foot">${FOOT}</div>`;
 
+/* Head-of-institution signature image (Mr. T.M. Jarook) embedded for reliable printing */
+const SIG_B = 'data:image/png;base64,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';
+
 function buildPreview() {
   const v  = id => esc(val(id));
   const ml = id => esc(val(id)).replace(/\n/g, '<br>');     // multiline
@@ -793,7 +808,7 @@ function buildPreview() {
         ${r(12, 'If yes, provide details', bPrevDet)}
       </table>
       <div class="sig-line">
-        <div class="blk"><div class="ink">${v('b_sig')}</div><div class="rule">Signature of the head of institution</div></div>
+        <div class="blk"><div class="ink"><img src="${SIG_B}" alt="Signature of Mr. T.M. Jarook" /></div><div class="rule">Signature of the head of institution</div><div class="signame">Mr. T.M. Jarook</div></div>
         <div class="blk"><div class="ink">${fmt(val('b_sig_date'))}</div><div class="rule">Date</div></div>
       </div>
     </div>`;
